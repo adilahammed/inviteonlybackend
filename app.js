@@ -10,7 +10,7 @@ const app=express()
 const register=require('./routes/register')
 const tokencheck=require('./middleware/tokencheck')
 const invite=require('./routes/invite')
-
+const profile=require('./routes/profile')
 
 
 //mongoose
@@ -29,8 +29,8 @@ app.use(express.json())
 app.use(cors())
 app.use('/account',register)
 app.use('/api',tokencheck)
-app.use('/api',invite)
-
+app.use('/api/invite',invite)
+app.use('/api/profile',profile)
 
 
 app.get('/',(req,res)=>{

@@ -21,7 +21,6 @@ route.post('/create',async (req,res)=>{
         result1.invite.map((a,i)=>{
             if(a===email){
                 inviteflag=true
-                result1.invite.splice(i,1)
             }    
         })
         console.log(result1.invite)
@@ -32,10 +31,11 @@ route.post('/create',async (req,res)=>{
             username,
             email,
             password:hashpassword,
+            invitedby:inviter
         }).then((result)=>{
             console.log(result);
             res.json({status:"created success fully"})
-            users.updateOne({email:inviter},{invite:result1.invite,$push:{joined:email}})
+            users.updateOne({email:inviter},{$pull:{invite:{$in:[email]}},$push:{joined:email}})
             .then((upres)=>{
                 console.log(upres)
             })

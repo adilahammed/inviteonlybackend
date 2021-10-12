@@ -48,5 +48,16 @@ route.get('/invited',(req,res)=>{
     })
 })
 
+route.post('/remove',(req,res)=>{
+    console.log(req.body.removename)
+    userDB.updateOne({_id:req.user.id},{$pull:{invite:{$in:[req.body.removename]}}})
+        .then((result)=>{
+            console.log(result)
+            res.json({status:"ok",msg:"removed success"})
+        })
+        .catch((err)=>{
+            res.json({status:"error"})
+        })
+})
 
 module.exports=route
