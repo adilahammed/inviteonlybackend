@@ -36,9 +36,9 @@ route.post('/create',async (req,res)=>{
             console.log(result);
             res.json({status:"created success fully"})
             users.updateOne({email:inviter},{$pull:{invite:{$in:[email]}},$push:{joined:email}})
-            .then((upres)=>{
-                console.log(upres)
-            })
+                .then((upres)=>{
+                    console.log(upres)
+                })
 
         }).catch((err)=>{
             if(err.code===11000){

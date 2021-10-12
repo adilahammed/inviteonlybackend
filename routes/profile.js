@@ -9,6 +9,9 @@ route.get('/view',(req,res)=>{
         .then((result)=>{
             console.log(result)
             res.json({status:"ok",msg:result})
+        }).catch((err)=>{
+            console.log(err)
+            res.json({status:"error"})
         })
 })
 
